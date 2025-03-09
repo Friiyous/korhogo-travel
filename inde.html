@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Découvrez Korhogo, une destination unique en Côte d'Ivoire avec ses paysages, sa culture et ses événements.">
+  <meta name="keywords" content="Korhogo, voyage, Côte d'Ivoire, tourisme, culture, nature">
+  <title>Korhogo Travel - Découvrez Korhogo</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+    body {
+      background-color: #e6f0fa;
+      color: #1a1a40;
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(45deg, #1a3c5e, #4da8da);
+      color: white;
+      padding: 1.2rem 2rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    .navbar .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      text-shadow: 0 0 5px rgba(255,255,255,0.5);
+    }
+    .navbar .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+    .navbar .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+    }
+    .navbar .nav-links a:hover {
+      color: #ffd700;
+      text-shadow: 0 0 10px #ffd700;
+    }
+    .navbar button {
+      padding: 0.5rem 1rem;
+      background: #27ae60;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .navbar button:hover {
+      transform: scale(1.1);
+    }
+    .hero {
+      height: 100vh;
+      position: relative;
+      background: linear-gradient(rgba(26,60,94,0.7), rgba(26,60,94,0.7)), url('https://via.placeholder.com/1920x1080?text=Vue+Paysage+Korhogo') no-repeat center center/cover;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+    .hero h1, .hero p, .hero button {
+      position: relative;
+      z-index: 1;
+    }
+    .hero h1 {
+      font-size: 4rem;
+      animation: fadeIn 2s ease-in-out;
+      text-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+    }
+    .hero p {
+      font-size: 1.5rem;
+      margin: 1rem 0;
+    }
+    .hero button {
+      padding: 1rem 2rem;
+      background: linear-gradient(45deg, #4da8da, #1a3c5e);
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .hero button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .about {
+      padding: 4rem 2rem;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .about h2 {
+      font-size: 2.5rem;
+      color: #1a3c5e;
+      margin-bottom: 1.5rem;
+      animation: fadeIn 1s ease;
+    }
+    .about p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .stats {
+      background: linear-gradient(45deg, #fff, #e6f0fa);
+      padding: 3rem 1rem;
+      text-align: center;
+    }
+    .stats h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: #1a3c5e;
+    }
+    .stats-container {
+      display: flex;
+      justify-content: center;
+      gap: 4rem;
+      flex-wrap: wrap;
+    }
+    .stat {
+      font-size: 1.3rem;
+      color: #1a1a40;
+    }
+    .stat span {
+      display: block;
+      font-size: 3rem;
+      color: #4da8da;
+      font-weight: bold;
+      text-shadow: 0 0 5px #4da8da;
+    }
+    .destinations {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: #f9f9f9;
+    }
+    .destinations h2 {
+      font-size: 2.5rem;
+      color: #1a3c5e;
+      margin-bottom: 2rem;
+    }
+    .carousel {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    .cards {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+    .card {
+      flex: 0 0 300px;
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      margin: 0 1rem;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .card h3 {
+      font-size: 1.5rem;
+      margin: 1rem 0 0.5rem;
+      color: #1a3c5e;
+    }
+    .card p {
+      font-size: 1rem;
+      color: #666;
+      padding: 0 1rem 1rem;
+    }
+    .carousel-controls {
+      margin-top: 1rem;
+    }
+    .carousel-controls button {
+      padding: 0.5rem 1rem;
+      background: #4da8da;
+      border: none;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+      margin: 0 0.5rem;
+      transition: background 0.3s ease;
+    }
+    .carousel-controls button:hover {
+      background: #1a3c5e;
+    }
+    .events {
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    .events h2 {
+      font-size: 2.5rem;
+      color: #1a3c5e;
+      margin-bottom: 2rem;
+    }
+    .event-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .event-item {
+      background: white;
+      border-radius: 15px;
+      padding: 1.5rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+    .event-item:hover {
+      transform: translateY(-10px);
+    }
+    .event-item h3 {
+      font-size: 1.5rem;
+      color: #1a3c5e;
+      margin-bottom: 0.5rem;
+    }
+    .contact {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: linear-gradient(45deg, #e6f0fa, #fff);
+    }
+    .contact h2 {
+      font-size: 2.5rem;
+      color: #1a3c5e;
+      margin-bottom: 2rem;
+    }
+    #contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    #contact-form input,
+    #contact-form textarea {
+      padding: 1rem;
+      border: 2px solid #4da8da;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      transition: border-color 0.3s ease;
+    }
+    #contact-form input:focus,
+    #contact-form textarea:focus {
+      border-color: #1a3c5e;
+      outline: none;
+    }
+    #contact-form button {
+      padding: 1rem;
+      background: linear-gradient(45deg, #1a3c5e, #4da8da);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+    #contact-form button:hover {
+      transform: scale(1.05);
+    }
+    #form-message {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+    }
+    body.dark-mode {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+    body.dark-mode .navbar {
+      background: linear-gradient(45deg, #1e1e1e, #2c2c2c);
+    }
+    body.dark-mode .card,
+    body.dark-mode .event-item,
+    body.dark-mode .stats {
+      background: #2c2c2c;
+      color: #e0e0e0;
+    }
+    body.dark-mode .card p,
+    body.dark-mode .event-item p {
+      color: #a0a0a0;
+    }
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+      }
+      .navbar .nav-links {
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+      .hero h1 { font-size: 2.5rem; }
+      .hero p { font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">Korhogo Travel</div>
+    <ul class="nav-links">
+      <li><a href="#home">Accueil</a></li>
+      <li><a href="#about">À Propos</a></li>
+      <li><a href="#destinations">Destinations</a></li>
+      <li><a href="#events">Événements</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><button id="theme-toggle">Mode Sombre</button></li>
+    </ul>
+  </nav>
+  <section id="home" class="hero">
+    <canvas id="particles"></canvas>
+    <h1>Bienvenue à Korhogo, la Perle du Nord</h1>
+    <p>Explorez une terre de culture, de nature et d’hospitalité inégalée.</p>
+    <button onclick="window.scrollTo({top: document.querySelector('#destinations').offsetTop, behavior: 'smooth'})">Planifiez votre visite</button>
+  </section>
+  <section id="about" class="about">
+    <h2>Pourquoi Korhogo ?</h2>
+    <p>Korhogo, nichée dans le nord de la Côte d'Ivoire, est un joyau culturel et naturel. Connue pour son artisanat, ses paysages verdoyants et son peuple chaleureux, elle attire les amoureux de l’authenticité. En tant qu’infirmier diplômé d’État basé ici, je mets en lumière cette région unique à travers ma passion pour la technologie et le voyage.</p>
+  </section>
+  <section class="stats">
+    <h2>Ce qui rend Korhogo spécial</h2>
+    <div class="stats-container">
+      <div class="stat"><span data-target="50">0</span> Sites à explorer</div>
+      <div class="stat"><span data-target="10">0</span> Festivals annuels</div>
+      <div class="stat"><span data-target="100">0</span> % Authenticité</div>
+    </div>
+  </section>
+  <section id="destinations" class="destinations">
+    <h2>Les Incontournables de Korhogo</h2>
+    <div class="carousel">
+      <div class="cards">
+        <div class="card">
+          <img src="https://via.placeholder.com/300x200?text=Cascade+de+Korhogo" alt="Cascade de Korhogo">
+          <h3>Cascade de Korhogo</h3>
+          <p>Plongez dans la sérénité de cette cascade naturelle, un havre de paix à quelques pas de la ville.</p>
+        </div>
+        <div class="card">
+          <img src="https://via.placeholder.com/300x200?text=Marché+Artisanal" alt="Marché Artisanal">
+          <h3>Marché Artisanal</h3>
+          <p>Vibrez au rythme des couleurs et ramenez chez vous un morceau de l’âme de Korhogo.</p>
+        </div>
+        <div class="card">
+          <img src="https://via.placeholder.com/300x200?text=Parc+Naturel+de+Korhogo" alt="Parc Naturel de Korhogo">
+          <h3>Parc Naturel de Korhogo</h3>
+          <p>Explorez une biodiversité riche et des sentiers qui émerveillent les aventuriers.</p>
+        </div>
+        <div class="card">
+          <img src="https://via.placeholder.com/300x200?text=Montagnes+du+Djimini" alt="Montagnes du Djimini">
+          <h3>Montagnes du Djimini</h3>
+          <p>Admirez des vues à couper le souffle depuis ces montagnes majestueuses.</p>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-controls">
+      <button id="prev">Précédent</button>
+      <button id="next">Suivant</button>
+    </div>
+  </section>
+  <section id="events" class="events">
+    <h2>Événements à ne pas manquer</h2>
+    <div class="event-list">
+      <div class="event-item">
+        <h3>Fête de la Culture</h3>
+        <p>Plongez dans l’héritage de Korhogo avec des performances traditionnelles et des stands d’artisanat.</p>
+      </div>
+      <div class="event-item">
+        <h3>Festival du Wax</h3>
+        <p>Célébrez l’art du wax avec des créations uniques et une ambiance festive.</p>
+      </div>
+    </div>
+  </section>
+  <section id="contact" class="contact">
+    <h2>Planifiez votre voyage</h2>
+    <form id="contact-form">
+      <input type="text" id="name" placeholder="Votre nom" required>
+      <input type="email" id="email" placeholder="Votre email" required>
+      <textarea id="message" placeholder="Dites-nous ce que vous voulez découvrir à Korhogo" rows="5" required></textarea>
+      <button type="submit">Envoyer</button>
+    </form>
+    <p id="form-message"></p>
+  </section>
+  <script>
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const particlesArray = [];
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 5 + 1;
+        this.speedX = Math.random() * 3 - 1.5;
+        this.speedY = Math.random() * 3 - 1.5;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.size > 0.2) this.size -= 0.1;
+      }
+      draw() {
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+    function initParticles() {
+      for (let i = 0; i < 100; i++) {
+        particlesArray.push(new Particle());
+      }
+    }
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].update();
+        particlesArray[i].draw();
+        if (particlesArray[i].size <= 0.2) {
+          particlesArray.splice(i, 1);
+          i--;
+          particlesArray.push(new Particle());
+        }
+      }
+      requestAnimationFrame(animateParticles);
+    }
+    initParticles();
+    animateParticles();
+    const cards = document.querySelector('.cards');
+    const cardWidth = 320;
+    let currentIndex = 0;
+    const totalCards = document.querySelectorAll('.card').length;
+    document.getElementById('next').addEventListener('click', () => {
+      if (currentIndex < totalCards - 1) {
+        currentIndex++;
+        cards.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+      }
+    });
+    document.getElementById('prev').addEventListener('click', () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        cards.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+      }
+    });
+    document.getElementById('contact-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+      if (name && email && message) {
+        document.getElementById('form-message').textContent = 'Votre demande a été envoyée ! Nous vous répondrons bientôt.';
+        document.getElementById('form-message').style.color = '#27ae60';
+        this.reset();
+      } else {
+        document.getElementById('form-message').textContent = 'Veuillez remplir tous les champs.';
+        document.getElementById('form-message').style.color = '#e74c3c';
+      }
+    });
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      themeToggle.textContent = document.body.classList.contains('dark-mode') ? 'Mode Clair' : 'Mode Sombre';
+    });
+    const stats = document.querySelectorAll('.stat span');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const target = +entry.target.getAttribute('data-target');
+          let count = 0;
+          const increment = target / 50;
+          const updateCount = () => {
+            count += increment;
+            if (count < target) {
+              entry.target.textContent = Math.ceil(count);
+              requestAnimationFrame(updateCount);
+            } else {
+              entry.target.textContent = target;
+            }
+          };
+          updateCount();
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    stats.forEach(stat => observer.observe(stat));
+  </script>
+</body>
+</html>
